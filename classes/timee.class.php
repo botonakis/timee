@@ -8,14 +8,17 @@
 			
 		}
 		public function start_time(){
-			$this->stime = getrusage();
+			$s_tmr = count($this->stime);
+			$this->stime[$s_tmr++] = getrusage();
 		}
 		public function stop_time(){
-			$this->etime = getrusage();
-			$ctime = $this->calc_time($this->etime, $this->stime, "utime");
-			$sctime = $this->calc_time($this->etime, $this->stime, "stime");
-			$this->results['compute'] = $ctime." ms";
-			$this->results['calls'] = $sctime." ms";
+			$e_tmr = count($this->etime);
+			$this->etime[$e_tmr] = getrusage();
+			$ctime = $this->calc_time($this->etime[$e_tmr], $this->stime[$e_tmr], "utime");
+			$sctime = $this->calc_time($this->etime[$e_tmr], $this->stime[$e_tmr], "stime");
+			$this->results[$e_tmr]['compute'] = $ctime." ms";
+			$this->results[$e_tmr]['calls'] = $sctime." ms";
+
 		}
 
 		function calc_time($ru, $rus, $index) {
