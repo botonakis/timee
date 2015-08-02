@@ -5,8 +5,8 @@
 			$this->timee_model = $model;
 		}
 
-		public function results(){
-			return "<div class=\"timee_results\"><pre>".print_r($this->timee_model->results,true)."</pre></div>";
+		public function results($result=null){
+			return "<div class=\"timee_results\"><pre>".(isset($result) ? print_r($this->timee_model->results[$result-1],true) : print_r($this->timee_model->results,true))."</pre></div>";
 		}
 		public function __destruct(){
 			unset($this->timee_model);

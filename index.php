@@ -36,4 +36,9 @@
 
 	//show summary results
 	echo ($view->results());
+
+
+
+	//show only 2nd result
+	echo ($view->results(2));
 ?>
